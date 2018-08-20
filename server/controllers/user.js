@@ -16,7 +16,7 @@ class user {
         })
         .then( user =>{
             const token = jwt.sign({ id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin }, process.env.secret_key)
-            console.log(user);
+            // console.log(user);
             res.json({token})
         })
         .catch( err =>{
@@ -50,7 +50,7 @@ class user {
         
         var decoded = jwt.verify(req.headers.token, process.env.secret_key)
         console.log("masuk verify");
-        console.log(decoded);
+        // console.log(decoded);
         res.json(decoded)
     }
 }

@@ -133,7 +133,7 @@ export default new Vuex.Store({
       .then(result=>{
 
         console.log("success upload to bucket");
-        if(!this.state.discount){
+        if(!this.discount || this.discount>100 || this.discount<0){
           this.state.discount=0
         }
         axios.post('http://localhost:3000/items/add',{
@@ -177,7 +177,7 @@ export default new Vuex.Store({
     listCategory({commit,dispatch},payload){
       axios.get(`http://localhost:3000/items/category/${payload}`)
       .then( product =>{
-        console.log(product.data);
+        // console.log(product.data);
         commit('products', product.data)       
       })
     },
@@ -253,7 +253,7 @@ export default new Vuex.Store({
     listReport({commit,dispatch},payload){
       axios.get('http://localhost:3000/transactions')
       .then( trans =>{
-        console.log(trans.data);
+        // console.log(trans.data);
         commit('report',trans.data)
       })
       .catch( err =>{
@@ -279,7 +279,7 @@ export default new Vuex.Store({
       this.state.img = ''
     },
     Edit({commit,dispatch},payload){
-      if(!this.state.discount){
+      if(!this.discount || this.discount>100 || this.discount<0){
         this.state.discount=0
       }
       if(this.state.img){
@@ -310,7 +310,13 @@ export default new Vuex.Store({
           this.state.category = ''
           this.state.discount = 0
           this.state.img = ''
-          dispatch('listAllPro')
+          swal("", "You success edit a product!", "success")
+          .then(value=>{                 
+            dispatch('listAllPro')
+          })
+          .catch(err=>{
+              console.log(err);
+          }) 
         console.log('success add to database');
       })
       .catch(err=>{
@@ -320,7 +326,7 @@ export default new Vuex.Store({
     Delete({commit,dispatch},payload){
       axios.delete(`http://localhost:3000/items/delete/${payload}`)
       .then( delpro =>{
-        console.log(delpro);
+        // console.log(delpro);
         dispatch('listAllPro')
       })
       .catch( err =>{
@@ -389,6 +395,39 @@ export default new Vuex.Store({
         console.log(err);
         
       })
+    },
+    deleteItem({commit,dispatch},payload){
+      this.state.total -= Number(payload.harga)
+      var status = false
+      for(var i = 0; i < this.state.cart.length; i++){
+        if(this.state.cart[i]._id==payload._id){
+          if(this.state.cart[i].qty<=1){
+            this.state.cart.splice(i,1)
+            status = true;
+          }
+          else{
+            this.state.cart[i].qty -= 1
+            status = true;
+          }
+        }
+      }
+      if(!status){
+        payload.qty = 0
+        // console.log(this.state.cart);
+        
+        this.state.cart.push(payload)
+      }
+      else{
+        // console.log(this.state.cart);
+      }
+    },
+    addItem({commit,dispatch},payload){
+      this.state.total += Number(payload.harga)
+      for(var i = 0; i < this.state.cart.length; i++){
+        if(this.state.cart[i]._id==payload._id){
+            this.state.cart[i].qty += 1
+        }
+      }
     }
   }
 })

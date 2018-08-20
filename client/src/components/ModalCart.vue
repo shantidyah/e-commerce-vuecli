@@ -25,7 +25,7 @@
                         </div>
                         <div class="row">
                             <!-- <div class="col-md-12"> -->
-                            <button>-</button><h4 class="col-md-4" align="center">{{item.qty}}</h4><button>+</button>
+                            <button @click="deleteItem(item)">-</button><h4 class="col-md-4" align="center">{{item.qty}}</h4><button @click="addItem(item)">+</button>
                             <!-- </div> -->
                         </div>
 
@@ -56,7 +56,9 @@ export default {
     },
     methods:{
         ...mapActions([
-            'Checkout'
+            'Checkout',
+            'deleteItem',
+            'addItem'
         ])
     }
 }

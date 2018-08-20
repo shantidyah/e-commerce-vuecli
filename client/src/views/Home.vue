@@ -2,7 +2,7 @@
   <div class="home">
     <Headers/>
     <Navbar/>
-    <!-- <Carausell/> -->
+    <Carausell/>
     <br>
     <category/>
     <br>

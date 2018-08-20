@@ -10,13 +10,13 @@
             </div>
             <div class="modal-body">
                 type product:
-                <input type="text" class="form-control" id="type" name="name" v-model="type">
+                <input type="text" class="form-control" id="typeAdd" name="name" v-model="type">
                 brand:
-                <input type="text" class="form-control" id="brand" name="brand" v-model="brand">
+                <input type="text" class="form-control" id="brandAdd" name="brand" v-model="brand">
                 price:
                 <input type="number" class="form-control" id="price" name="price" v-model="price"> {{statusPrice}} <br>
                 category:
-                <input type="text" class="form-control" id="category" name="category" v-model="category">
+                <input type="text" class="form-control" id="categoryAdd" name="category" v-model="category">
                 discount:
                 <input type="number" class="form-control" name="disc" v-model="discount"> {{status}} <br>
                 <!-- <p style="color-red" v-if="discount>=100">discount tidak boleh lebih dari 100</p> -->
