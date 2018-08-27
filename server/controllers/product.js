@@ -7,7 +7,7 @@ class product {
             message: 'Your file is successfully uploaded',
             link: req.file.cloudStoragePublicUrl,
             file: req.file
-          })
+        })
     }
     static Add ( req, res ) {
         Product.create({

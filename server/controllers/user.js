@@ -38,11 +38,11 @@ class user {
                     res.json({token})
                 }
                 else{
-                    res.json('pass salah')
+                    res.status(401).json({msg:'pass salah'})
                 }
             }
             else{
-                res.json('email salah')
+                res.status(401).json({msg:'email salah'})
             }
         })
     }
